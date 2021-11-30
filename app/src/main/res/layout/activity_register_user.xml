@@ -5,32 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/minecraft_splash"
-    tools:context=".MainActivity">
+    tools:context=".RegisterUser">
 
     <TextView
-        android:id="@+id/loginLabel"
+        android:id="@+id/registerLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="300dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:shadowColor="#623D26"
         android:shadowRadius="8"
-        android:text="@string/log_in"
+        android:text="@string/register"
         android:textColor="#FFFFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="130dp"
         android:background="#CC8A8686"
         android:gravity="center"
         android:orientation="vertical"
@@ -71,17 +71,17 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/signinButton"
+            android:id="@+id/signupButton"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="@string/sign_in"
+            android:text="@string/sign_up"
             android:textSize="24dp" />
 
         <LinearLayout
-            android:id="@+id/signupLayout"
+            android:id="@+id/signinLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -89,17 +89,17 @@
             android:rotationX="0">
 
             <TextView
-                android:id="@+id/noAccountLabel"
+                android:id="@+id/haveAccountLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingRight="10dp"
-                android:text="@string/noAccount"
+                android:text="@string/haveAccount"
                 android:textColor="#FFDDDDDD"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/signupLink"
+                android:id="@+id/signinLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -107,7 +107,7 @@
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="@string/sign_up"
+                android:text="@string/sign_in"
                 android:textColor="#FF9Bc86D"
                 android:textSize="16sp"
                 android:textStyle="bold" />

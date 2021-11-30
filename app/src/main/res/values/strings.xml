@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CST338_Project2</string>
+    <string name="app_name">YOURCRAFT shop</string>
     // Used by SplashActivity (Splash Screen)
     <string name="shop_name">YOURCRAFT shop</string>
     // Used for MainActivity (Login Screen)
@@ -10,7 +10,9 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="noAccount">Don\'t have an account?</string>
+    <string name="haveAccount">Already have an account?</string>
     <string name="errorNoUsername">ERROR: Username is required.</string>
     <string name="errorNoPassword">ERROR: Password is required.</string>
     <string name="success">Success!~</string>
+
 </resources>

@@ -9,23 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CST338_Project2">
-
-        // Moved intent-filter section here from the ".MainActivity" section.
-        // Changed exported from false to true
-        <activity android:name=".SplashActivity" android:exported="true">
+        <activity
+            android:name=".RegisterUser"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="true"> // noActionBar removes it from splash
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ShopperHome" android:exported="false" />
-
-        // Moved intent-filter from here to the ".SplashActivity" for the splash screen feature
-        // Changed exported from true to false
-        <activity android:name=".MainActivity" android:exported="false">
-        </activity>
+        <activity
+            android:name=".ShopperHome"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

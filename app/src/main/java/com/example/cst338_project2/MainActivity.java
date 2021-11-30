@@ -8,11 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cst338_project2.db.AppDatabase;
+import com.example.cst338_project2.db.MyDao;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView username; // the TextView for username to be entered.
     TextView password; // the TextView for password to be entered.
     Button signinBtn; // the Button to click to sign in
+    TextView signupLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameValue);
         password = findViewById(R.id.passwordValue);
         signinBtn = findViewById(R.id.signinButton);
+        signupLink = findViewById(R.id.signupLink);
 
         signinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,5 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        signupLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "you want to sign up", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
