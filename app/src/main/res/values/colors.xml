@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    // My Minecraft Colors
+    <color name="gray">#FFAAAAAA</color>
+<!--    <color name="dark_gray">#FF555555</color>-->
+    <color name="dark_gray">#EE222222</color>
+    <color name="red">#FFFF5555</color>
+    <color name="gold">#FFFFAA00</color>
+    <color name="yellow">#FFFFFF55</color>
+    <color name="green">#FF55FF55</color>
+    <color name="dark_green">#FF00AA00</color>
+    <color name="aqua">#FF55FFFF</color>
+    <color name="dark_aqua">#FF00AAAA</color>
+    <color name="blue">#FF5555FF</color>
+    <color name="dark_blue">#FF0000AA</color>
+    <color name="purple">#FFFF55FF</color>
+    <color name="dark_purple">#FFAA00AA</color>
 </resources>

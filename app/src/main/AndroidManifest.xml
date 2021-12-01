@@ -10,12 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST338_Project2">
         <activity
-            android:name=".RegisterUser"
+            android:name=".AdminHome"
             android:exported="false" />
         <activity
+            android:name=".RegisterUser"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="true"> // noActionBar removes it from splash
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            // noActionBar removes it from splash
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"

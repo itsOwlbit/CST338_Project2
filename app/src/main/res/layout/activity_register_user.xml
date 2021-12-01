@@ -11,30 +11,30 @@
         android:id="@+id/registerLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:shadowColor="#623D26"
         android:shadowRadius="8"
         android:text="@string/register"
         android:textColor="#FFFFFFFF"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="300dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="130dp"
-        android:background="#CC8A8686"
+        android:background="@color/dark_gray"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingVertical="10dp"
+        android:paddingVertical="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -42,43 +42,48 @@
 
         <EditText
             android:id="@+id/usernameValue"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
-            android:background="#AAFFFFFF"
+            android:background="@color/gray"
             android:drawableLeft="@drawable/ic_baseline_person_24"
-            android:drawablePadding="20dp"
+            android:drawablePadding="10dp"
             android:ems="10"
             android:hint="@string/username"
             android:inputType="textPersonName"
             android:padding="10dp"
-            android:textSize="18sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:textColorHint="@color/white"
+            android:textSize="20dp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <EditText
             android:id="@+id/passwordValue"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
-            android:background="#AAFFFFFF"
+            android:background="@color/gray"
             android:drawableLeft="@drawable/ic_baseline_lock_24"
-            android:drawablePadding="20dp"
+            android:drawablePadding="10dp"
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:textSize="18sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:textColorHint="@color/white"
+            android:textSize="20dp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <Button
             android:id="@+id/signupButton"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/green"
             android:gravity="center"
             android:text="@string/sign_up"
-            android:textSize="24dp" />
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/signinLayout"
@@ -95,8 +100,8 @@
                 android:gravity="center"
                 android:paddingRight="10dp"
                 android:text="@string/haveAccount"
-                android:textColor="#FFDDDDDD"
-                android:textSize="16sp" />
+                android:textColor="@color/white"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/signinLink"
@@ -108,8 +113,9 @@
                 android:shadowDy="0"
                 android:shadowRadius="5"
                 android:text="@string/sign_in"
-                android:textColor="#FF9Bc86D"
-                android:textSize="16sp"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
