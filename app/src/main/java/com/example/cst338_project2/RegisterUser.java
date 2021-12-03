@@ -16,7 +16,7 @@ import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
 
-import java.util.List;
+//import java.util.List;
 
 public class RegisterUser extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
@@ -30,7 +30,7 @@ public class RegisterUser extends AppCompatActivity {
 
     private MyDao myDao;    // stores singleton database object
 
-    private List<User> userList;    // a list of User objects
+//    private List<User> userList;    // a list of User objects
     private int userId = -1;        // default userId if a valid userId is not received
     private User user;              // a User object for person logged/logging in
 

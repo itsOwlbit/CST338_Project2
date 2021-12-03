@@ -3,13 +3,13 @@ package com.example.cst338_project2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,18 +17,18 @@ import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
 
-import java.util.List;
-
 public class ShopperHome extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
+
+    ImageView backImg;      // the image from toolbar_layout to go back
+    TextView logoutField;   // the text from toolbar_layout to logout
 
     TextView welcomeField;          // the TextView where the welcome user message is displayed
     TextView deleteAccountLink;     // the TextView clickable link to delete user's account
 
     Button shopBtn;     // the button used to view shop inventory screen
     Button orderBtn;    // the button used to view orders screen
-    Button logoutBtn;   // the button used to logout
 
     private MyDao myDao;    // stores singleton database object
 
@@ -68,14 +68,25 @@ public class ShopperHome extends AppCompatActivity {
     }
 
     private void prepareLayout() {
+        backImg = findViewById(R.id.backImg);
+        backImg.setVisibility(View.INVISIBLE); // not needed to be seen on home page
+        logoutField = findViewById(R.id.logoutText);
+
         welcomeField = findViewById(R.id.welcomeText);
         shopBtn = findViewById(R.id.shopButton);
         orderBtn = findViewById(R.id.ordersButton);
-        logoutBtn = findViewById(R.id.logoutButton);
         deleteAccountLink = findViewById(R.id.deleteAccountLink);
     }
 
     private void checkListeners() {
+        // ClickListener for logout Text in toolbar_layout
+        logoutField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
+
         // ClickListener for shop button
         shopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,14 +100,6 @@ public class ShopperHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ShopperHome.this, "Order screen not set up yet.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // ClickListener for logout button
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logoutUser();
             }
         });
 

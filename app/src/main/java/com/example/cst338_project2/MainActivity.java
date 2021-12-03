@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
     private static final int MAX_LOGIN_ATTEMPTS = 3;
 
+
     TextView usernameField;      // the TextView for username to be entered.
     TextView passwordField;      // the TextView for password to be entered.
 

@@ -7,16 +7,16 @@
     android:background="@color/dark_gray"
     tools:context=".ShopperHome">
 
+    <include layout="@layout/toolbar_layout"/>
 
     <ImageView
         android:id="@+id/shopLogoImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:minWidth="75dp"
         android:minHeight="75dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/stat_sys_warning" />
@@ -57,7 +57,7 @@
             android:gravity="center"
             android:text="@string/shop"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
@@ -69,19 +69,7 @@
             android:gravity="center"
             android:text="@string/orderHistory"
             android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/logoutButton"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginVertical="10dp"
-            android:backgroundTint="@color/gray"
-            android:gravity="center"
-            android:text="@string/logout"
-            android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -98,7 +86,7 @@
             android:text="@string/deleteAccount"
             android:textAllCaps="true"
             android:textColor="@color/red"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
