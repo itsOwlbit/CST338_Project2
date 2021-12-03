@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 import com.example.cst338_project2.db.AppDatabase;
 
 @Entity(tableName = AppDatabase.USER_TABLE)
-public class Users {
+public class User {
 
     @PrimaryKey(autoGenerate = true)
     private int userID;     // auto-generated user ID.  Must be unique.
@@ -18,7 +18,7 @@ public class Users {
 
     private int isActive;   // 0 is deactivated/deleted account.  1 is active account.
 
-    public Users(String userName, String password, int isAdmin, int isActive) {
+    public User(String userName, String password, int isAdmin, int isActive) {
         this.userName = userName;
         this.password = password;
         this.isAdmin = isAdmin;
@@ -47,5 +47,9 @@ public class Users {
 
     public int getIsActive() {
         return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
 }

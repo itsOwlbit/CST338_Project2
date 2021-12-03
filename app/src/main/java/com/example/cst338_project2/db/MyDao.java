@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.cst338_project2.data.Users;
+import com.example.cst338_project2.data.User;
 
 import java.util.List;
 
@@ -15,18 +15,21 @@ import java.util.List;
 public interface MyDao {
 
     @Insert
-    void insert(Users... users);
+    void insert(User... users);
 
     @Update
-    void update(Users... users);
+    void update(User... users);
 
     @Delete
-    void delete(Users... users);
+    void delete(User... user);
 
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " ORDER BY userName ASC")
-    LiveData<List<Users>> getUsers();
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE )
+    List<User> getAllUsers();
 
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE userID = :name")
-    Users getUserByUsername(int name);
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE userName = :name")
+    User getUserByUsername(String name);
+
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE userID = :id")
+    User getUserByUserId(int id);
 
 }

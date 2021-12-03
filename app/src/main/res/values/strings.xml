@@ -23,7 +23,12 @@
     <string name="shopInventory">Shop Inventory</string>
     <string name="salesReport">Sales Report</string>
     <string name="manageUsers">Manage Users</string>
-    // Temp
+    // Other
+    <string name="logoutQuestion">Do you want to log out?</string>
+    <string name="confirmDeleteAccount">Are you sure you want to permanently delete your account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
     <string name="temp">temp</string>
 
 </resources>
