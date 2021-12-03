@@ -21,6 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
+    private static final int MAX_LOGIN_ATTEMPTS = 3;
 
     TextView usernameField;      // the TextView for username to be entered.
     TextView passwordField;      // the TextView for password to be entered.
@@ -34,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private int userId = -1;        // default userId if a valid userId is not received
     private User user;              // a User object for person logged/logging in
 
-    private String username;    // used to store username retrieved from TextView field
-    private String password;    // used to store password retrieved from TextView field
+    private String username;        // used to store username retrieved from TextView field
+    private String password;        // used to store password retrieved from TextView field
+    private int loginAttempts = 0;  // the number of logins attempted
 
     private SharedPreferences preferences = null;
 
@@ -54,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Check for setOnClickListener() events
         checkListeners();
-
-        // TODO:  Need to setup 3 allowed tries for login
     }
 
     private void checkPreferences() {
@@ -103,10 +103,16 @@ public class MainActivity extends AppCompatActivity {
                             "Both username and password are required.",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    // TODO: Also check their isActive status
                     // verify user in database and that password matches
                     if(checkForUserInDatabase() && validatePassword()) {
-                        // check if account isActive (if == 0) return.  toast: resgister for new acocunt?  account is deactivated.
+                        // If account is deactivated, then user needs to make a new account
+                        if(user.getIsActive() == 0) {
+                            Toast.makeText(MainActivity.this,
+                                    "Account " + user.getUserName() +
+                                            " has been deactivated.  Make a new account.",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         addUserToPreference(userId); // TODO: Is preferences working?
 
@@ -116,7 +122,18 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra(USER_ID_KEY, user.getUserID());
                         startActivity(intent);
                     } else {
-                        Toast.makeText(MainActivity.this, "Invalid username and/or password.", Toast.LENGTH_SHORT).show();
+                        loginAttempts++;
+                        if(loginAttempts == MAX_LOGIN_ATTEMPTS) {
+                            Toast.makeText(MainActivity.this,
+                                    "Maximum attempts used.  No more chances. Good Bye.",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                            System.exit(0);
+                        }
+                        Toast.makeText(MainActivity.this,
+                                "Invalid username and/or password. Only " +
+                                        (MAX_LOGIN_ATTEMPTS - loginAttempts) +
+                                        " attempts left.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
