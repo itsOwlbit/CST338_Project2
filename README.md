@@ -5,4 +5,6 @@ eCommerce project using Android Studio
 
 11/29 - Added the Room stuff although it is not wired up yet to anything.  Created both login and register activities.  No functionality yet.<br><br>
 
-11/30 - Didn't make as much progress as I would have liked.  I updated design in many activities and added some colors.  I would like to use Fragments, but I need to learn how.  I would like to connect the Users database to the login/register actions.  I would also like to figure out how to customize the top menu bar.
+11/30 - Didn't make as much progress as I would have liked.  I updated design in many activities and added some colors.  I would like to use Fragments, but I need to learn how.  I would like to connect the Users database to the login/register actions.  I would also like to figure out how to customize the top menu bar.<br><br>
+
+12/1 - Login works from MainActivity.  Signup works from RegisterUser.  Logout and delete account works from ShopperHome.  Still want to refine some functionality.  TODO notes the future changes to implement.  Not sure preferences does anything or how it works.  Needs more research into it.  I also want to create custom dialog boxes.<br><br>
