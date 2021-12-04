@@ -80,11 +80,11 @@ public class RegisterUser extends AppCompatActivity {
                     } else {
                         // add user to database and make sure it worked
                         if(addUserToDB()) {
-                            addUserToPreference(userId); // TODO: Is preferences working?
+                            addUserToPreference(userId); // TODO: Update Preferences to work
 
                             // Can only create new shopper users at register screen
                             Intent intent = new Intent(v.getContext(), ShopperHome.class);
-                            intent.putExtra(USER_ID_KEY, user.getUserID());
+                            intent.putExtra(USER_ID_KEY, user.getUserID()); // Todo: is this correct?
                             startActivity(intent);
                         } else {
                             Toast.makeText(RegisterUser.this, "Something went wrong.  Could not add " + username, Toast.LENGTH_SHORT).show();

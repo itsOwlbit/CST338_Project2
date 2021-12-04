@@ -21,8 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
-    private static final int MAX_LOGIN_ATTEMPTS = 3;
-
+    private static final int MAX_LOGIN_ATTEMPTS = 3; // Used to prevent brute force guessing
 
     TextView usernameField;      // the TextView for username to be entered.
     TextView passwordField;      // the TextView for password to be entered.
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private MyDao myDao;    // stores singleton database object
 
-    private List<User> userList;    // a list of User objects
     private int userId = -1;        // default userId if a valid userId is not received
     private User user;              // a User object for person logged/logging in
 
@@ -67,7 +65,17 @@ public class MainActivity extends AppCompatActivity {
         userId = preferences.getInt(USER_ID_KEY, -1);
 
         if(userId != -1) {
-            return;
+            // send user's to correct access level.  isAdmin = 1 is an admin.
+            user = myDao.getUserByUserId(userId);
+
+            Intent intent;
+            if(user.getIsAdmin() == 1) {
+                intent = new Intent(MainActivity.this, AdminHome.class);
+            } else {
+                intent = new Intent(MainActivity.this, ShopperHome.class);
+            }
+            intent.putExtra(USER_ID_KEY, user.getUserID());
+            startActivity(intent);
         }
 
         List<User> users = myDao.getAllUsers();
@@ -79,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
             myDao.insert(defaultUser);
             myDao.insert(defaultAdmin);
         }
-
-        return;
     }
 
     private void prepareLayout() {
@@ -95,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         signinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get values from display
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
 
@@ -115,11 +120,16 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
 
-                        addUserToPreference(userId); // TODO: Is preferences working?
+                        userId = user.getUserID();
+                        addUserToPreference(userId);
 
-                        // TODO: Send user to appropriate activity screen depending on isAdmin?
-
-                        Intent intent = new Intent(v.getContext(), ShopperHome.class);
+                        // send user's to correct access level.  isAdmin = 1 is an admin.
+                        Intent intent;
+                        if(user.getIsAdmin() == 1) {
+                            intent = new Intent(v.getContext(), AdminHome.class);
+                        } else {
+                            intent = new Intent(v.getContext(), ShopperHome.class);
+                        }
                         intent.putExtra(USER_ID_KEY, user.getUserID());
                         startActivity(intent);
                     } else {
@@ -151,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkForUserInDatabase() {
         user = myDao.getUserByUsername(username);
-
         return (user != null);
     }
 
@@ -161,11 +170,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void addUserToPreference(int userId) {
         if(preferences == null) {
-            preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
+            preferences = getSharedPreferences(PREFERENCES_KEY, MODE_PRIVATE);
         }
 
         SharedPreferences.Editor editor = preferences.edit();
+        editor.clear(); // just a check to clear preferences before adding a new one
+        editor.commit();
         editor.putInt(USER_ID_KEY, userId);
+        editor.commit();
     }
 
     @Override

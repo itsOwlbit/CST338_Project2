@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_gray"
+    android:background="@drawable/ironbg"
     tools:context=".ShopperHome">
 
     <include layout="@layout/toolbar_layout"/>
@@ -27,9 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="40dp"
+        android:shadowColor="@color/iron"
+        android:shadowRadius="5"
         android:text="@string/temp"
-        android:textColor="@color/green"
-        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold
+"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shopLogoImage" />
@@ -40,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:background="@color/dark_gray"
+        android:background="@color/tGray"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingVertical="20dp"
@@ -53,10 +57,10 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginVertical="10dp"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/dark_gray"
             android:gravity="center"
             android:text="@string/shop"
-            android:textColor="@color/black"
+            android:textColor="@color/iron"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -65,10 +69,10 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginVertical="10dp"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/dark_gray"
             android:gravity="center"
             android:text="@string/orderHistory"
-            android:textColor="@color/black"
+            android:textColor="@color/iron"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -85,7 +89,7 @@
             android:shadowRadius="5"
             android:text="@string/deleteAccount"
             android:textAllCaps="true"
-            android:textColor="@color/red"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
     </LinearLayout>

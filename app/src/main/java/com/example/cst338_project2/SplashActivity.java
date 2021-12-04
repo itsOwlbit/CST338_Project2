@@ -2,9 +2,12 @@ package com.example.cst338_project2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 /**
  * Created (SplashActivity.java and activity_splash.xml) with the help of:
@@ -15,6 +18,12 @@ import android.os.Handler;
  */
 
 public class SplashActivity extends AppCompatActivity {
+    private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
+    private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
+
+    private SharedPreferences preferences = null;
+
+    private int userId = -1;        // default userId if a valid userId is not received
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
