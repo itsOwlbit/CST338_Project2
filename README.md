@@ -12,3 +12,5 @@ eCommerce project using Android Studio
 12/2 - Forgot what I did this day or pushed up.  I just know I did stuff.  How did I lose a day?<br><br>
 
 12/3 - SharedPreferences now works.  Users can login to shopper and admin accounts, given they have the correct credentials.  Updated UI appeal.  Now that the basic activities are set, time to get real functionality from this program.  I need Admins to be able to manage the users.  Both admin and shopper need to interact with inventory and orders, so those database tables need to be set up.  Do I go with seperate activity per button click or learn how to set up fragments?<br><br>
+
+12/4 - Admin user management side is almost done.  Admin can create new shopper users and set them to active and inactive.  The view is refreshed after add or status change.  Still have to think more about deleting since there has to be a safety to ensure not all admins are deleted.  Admins can't be created right now either.  So only one default admin.  Some files were renamed because this is getting messy.  I did not consider naming conventions because I didn't know what I needed or how I would build this project.
