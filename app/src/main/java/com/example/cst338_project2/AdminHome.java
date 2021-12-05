@@ -105,7 +105,8 @@ public class AdminHome extends AppCompatActivity {
         inventoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminHome.this, "Inventory screen not set up yet.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminHome.this, AdminInventory.class);
+                startActivity(intent);
             }
         });
 

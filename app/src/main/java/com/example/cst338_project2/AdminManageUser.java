@@ -26,6 +26,8 @@ import java.util.List;
  * This for clickable recyclerview?
  * https://www.youtube.com/watch?v=7GPUpvcU1FE
  * TODO: Add delete?  Remove deactivate?  Add admins not just shoppers?  Make sure all admins are not deleted.
+ * TODO: back/up button
+ * TODO: logout link
  */
 public class AdminManageUser extends AppCompatActivity implements RecyclerViewInterface{
 

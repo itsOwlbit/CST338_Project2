@@ -28,12 +28,13 @@
     <string name="confirmDeleteAccount">Are you sure you want to permanently delete your account?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
+    // Admin manage user
     <string name="changeStatusOn">Activate</string>
     <string name="changeStatusOff">Dectivate</string>
-
     <string name="clear">Clear</string>
     <string name="addUser">Add User</string>
+    // Admin Inventory
+    <string name="welcomeInventory">Welcome to my inventory.</string>
 
     <string name="temp">temp</string>
     <!-- TODO: Remove or change this placeholder text -->
