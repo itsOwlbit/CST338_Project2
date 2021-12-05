@@ -11,6 +11,7 @@
     <color name="gray">#FFAAAAAA</color>
     <color name="tGray">#AAAAAAAA</color>
     <color name="dark_gray">#EE222222</color>
+    <color name="dark_gray2">#FF222222</color>
     <color name="red">#FFFF5555</color>
     <color name="gold">#FFFFAA00</color>
     <color name="yellow">#FFFFFF55</color>
@@ -23,4 +24,5 @@
     <color name="purple">#FFFF55FF</color>
     <color name="dark_purple">#FFAA00AA</color>
     <color name="iron">#FFCCA379</color>
+    <color name="oak">#FFB18F5C</color>
 </resources>

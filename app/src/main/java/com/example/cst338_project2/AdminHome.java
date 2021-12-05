@@ -23,7 +23,7 @@ public class AdminHome extends AppCompatActivity {
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
 
     ImageView backImg;      // the image from toolbar_layout to go back
-    TextView toolbarTitleField;
+    TextView toolbarTitleField;  // the text for toolbar title
     TextView logoutField;   // the text from toolbar_layout to logout
 
     TextView welcomeField;          // the TextView where the welcome user message is displayed
@@ -78,12 +78,14 @@ public class AdminHome extends AppCompatActivity {
     }
 
     private void prepareLayout() {
+        // Used to set toolbar
         backImg = findViewById(R.id.backImg);
         backImg.setVisibility(View.INVISIBLE); // not needed to be seen on home page
         toolbarTitleField = findViewById(R.id.toolbarTitle);
-        toolbarTitleField.setTextColor(getResources().getColor(R.color.dark_aqua));
+        toolbarTitleField.setTextColor(getResources().getColor(R.color.aqua));
         logoutField = findViewById(R.id.logoutText);
 
+        // Used to set activity items
         welcomeField = findViewById(R.id.welcomeText);
         inventoryBtn = findViewById(R.id.inventoryButton);
         salesBtn = findViewById(R.id.salesButton);
@@ -119,7 +121,8 @@ public class AdminHome extends AppCompatActivity {
         usersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminHome.this, "Manage Users screen not set up yet.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminHome.this, AdminManageUser.class);
+                startActivity(intent);
             }
         });
     }

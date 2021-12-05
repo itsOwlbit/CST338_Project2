@@ -10,12 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST338_Project2">
         <activity
+            android:name=".AdminManageUser"
+            android:exported="false" />
+        <activity
+            android:name=".AdminManageUser"
+            android:exported="false" />
+        <activity
             android:name=".AdminHome"
             android:exported="false" />
         <activity
             android:name=".RegisterUser"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -33,7 +39,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -29,6 +29,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string name="changeStatusOn">Activate</string>
+    <string name="changeStatusOff">Dectivate</string>
+
+    <string name="clear">Clear</string>
+    <string name="addUser">Add User</string>
+
     <string name="temp">temp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
