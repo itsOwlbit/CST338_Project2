@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cst338_project2.data.Item;
 import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
+    private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
     private static final int MAX_LOGIN_ATTEMPTS = 3; // Used to prevent brute force guessing
 
@@ -82,10 +84,33 @@ public class MainActivity extends AppCompatActivity {
         if(users.size() <= 0) {
             // create default users if User table is empty.
             // TODO: Update default user/admin
-            User defaultUser = new User("juli", "123", 0, 1);
+            User defaultUser = new User("testuser1", "testuser1", 0, 1);
             User defaultAdmin = new User("admin2", "admin2", 1, 1);
             myDao.insert(defaultUser);
             myDao.insert(defaultAdmin);
+            Item stone = new Item("Stone",
+                    "Basic stone for any building project.",
+                    5, 1, 5, "", 1);
+            Item deepSlate = new Item("Deep Slate",
+                    "A very beautiful and dark building material.",
+                    5, 1, 2, "", 1);
+            Item darkOak = new Item("Dark Oak Logs",
+                    "For when plain oak or spurce just won't do.",
+                    10, 1, 3, "", 1);
+            Item oak = new Item("Oak Logs",
+                    "So useful in every build.  Use plain, stripped, or planks.",
+                    20, 1, 5, "", 1);
+            Item spruce = new Item("Spruce Logs",
+                    "Adds accent color.  Goes great with stone, oak, and dark oak.",
+                    10, 1, 5, "", 1);
+            Item pinkSheep = new Item("Purple Cow Sheep",
+                    "Comes with name tag and a lead.  You can't dye a cow to get this color.",
+                    0, 1, 1, "", 1);
+            myDao.insert(stone);
+            myDao.insert(deepSlate);
+            myDao.insert(darkOak);
+            myDao.insert(oak);
+            myDao.insert(spruce);
         }
     }
 
@@ -177,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         editor.clear(); // just a check to clear preferences before adding a new one
         editor.commit();
         editor.putInt(USER_ID_KEY, userId);
+        editor.putInt(USER_STATUS_KEY, user.getIsAdmin());
         editor.commit();
     }
 

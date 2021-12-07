@@ -20,6 +20,7 @@ import com.example.cst338_project2.db.MyDao;
 
 public class RegisterUser extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
+    private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
 
     TextView usernameField;      // the TextView for username to be entered.
@@ -117,6 +118,7 @@ public class RegisterUser extends AppCompatActivity {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(USER_ID_KEY, userId);
+        editor.putInt(USER_STATUS_KEY, user.getIsAdmin());
     }
 
     private boolean addUserToDB() {

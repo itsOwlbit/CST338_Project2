@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,8 +28,7 @@ import java.util.List;
  * TODO: back/up button
  * TODO: logout link
  */
-public class AdminManageUser extends AppCompatActivity implements RecyclerViewInterface{
-
+public class AdminManageUser extends AppCompatActivity implements IManageUserRecyclerView {
     ImageView backImg;          // the image from toolbar_layout to go back
     TextView toolbarTitleField; // the text for toolbar title
     TextView logoutField;       // the text from toolbar_layout to logout
@@ -38,11 +36,10 @@ public class AdminManageUser extends AppCompatActivity implements RecyclerViewIn
     UserAdapter userAdapter;
     RecyclerView recyclerView;
 
-    TextView usernameField;
-    TextView passwordField;
-
-    Button clearBtn;
-    TextView addBtn;
+    TextView usernameField;     // used for bottom screen add user name
+    TextView passwordField;     // used for bottom screen add user password
+    Button clearBtn;            // used for bottom screen clear username and password fields
+    TextView addBtn;            // used for bottom screen to add new user
 
     private User newUser;       // a User object for account being created
 
@@ -79,6 +76,7 @@ public class AdminManageUser extends AppCompatActivity implements RecyclerViewIn
         toolbarTitleField.setTextColor(getResources().getColor(R.color.aqua));
         toolbarTitleField.setText("Manage User Accounts");
         logoutField = findViewById(R.id.logoutText);
+        logoutField.setVisibility(View.INVISIBLE);
 
         // used for setting layout stuff
         usernameField = findViewById(R.id.usernameValue);
@@ -88,6 +86,13 @@ public class AdminManageUser extends AppCompatActivity implements RecyclerViewIn
     }
 
     private void checkListeners() {
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdminManageUser.super.onBackPressed();
+            }
+        });
+
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,14 +139,12 @@ public class AdminManageUser extends AppCompatActivity implements RecyclerViewIn
 
     private boolean checkForUserInDatabase() {
         newUser = myDao.getUserByUsername(username);
-
         return (newUser != null);
     }
 
     private boolean addUserToDB() {
         newUser = new User(username, password, 0, 1);
         myDao.insert(newUser);
-
         return (checkForUserInDatabase());
     }
 

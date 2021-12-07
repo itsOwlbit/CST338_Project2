@@ -5,7 +5,7 @@ package com.example.cst338_project2;
  *
  * From video: https://www.youtube.com/watch?v=7GPUpvcU1FE
  */
-public interface RecyclerViewInterface {
+public interface IManageUserRecyclerView {
     void onStatusClick(int position);
 
 //    void onDeleteClick(int position);

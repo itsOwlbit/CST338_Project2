@@ -33,8 +33,17 @@
     <string name="changeStatusOff">Dectivate</string>
     <string name="clear">Clear</string>
     <string name="addUser">Add User</string>
-    // Admin Inventory
+    // Item Inventory
     <string name="welcomeInventory">Welcome to my inventory.</string>
+    <string name="itemName">Item Name</string>
+    <string name="itemDescription">Short item description.</string>
+    <string name="number">#</string>
+    <string-array name="unitSize">
+        <item>item(s)</item>
+        <item>stack(s)</item>
+    </string-array>
+
+
 
     <string name="temp">temp</string>
     <!-- TODO: Remove or change this placeholder text -->

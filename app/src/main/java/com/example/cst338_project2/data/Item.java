@@ -17,18 +17,16 @@ public class Item {
     private int itemPrice;
     private int itemUnit;
     private String itemImg;
-    private String itemCategory;
     private int isForSale;
 
     public Item(String itemName, String itemDescription, int inStockQty, int itemPrice,
-                         int itemUnit, String itemImg, String itemCategory, int isForSale) {
+                         int itemUnit, String itemImg, int isForSale) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.inStockQty = inStockQty;
         this.itemPrice = itemPrice;
         this.itemUnit = itemUnit;
         this.itemImg = itemImg;
-        this.itemCategory = itemCategory;
         this.isForSale = isForSale;
     }
 
@@ -87,14 +85,6 @@ public class Item {
 
     public void setItemImg(String itemImg) {
         this.itemImg = itemImg;
-    }
-
-    public String getItemCategory() {
-        return itemCategory;
-    }
-
-    public void setItemCategory(String itemCategory) {
-        this.itemCategory = itemCategory;
     }
 
     public int getIsForSale() {

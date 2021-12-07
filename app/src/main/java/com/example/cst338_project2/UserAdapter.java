@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cst338_project2.data.User;
@@ -17,12 +16,12 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
-    private final RecyclerViewInterface recyclerViewInterface;  //needed for onClickItem
+    private final IManageUserRecyclerView recyclerViewInterface;  //needed for onClickItem
     private List<User> users;
     private LayoutInflater inflater;
     private Context context;
 
-    public UserAdapter(List<User> userList, Context context, RecyclerViewInterface recyclerViewInterface) {
+    public UserAdapter(List<User> userList, Context context, IManageUserRecyclerView recyclerViewInterface) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.users = userList;
