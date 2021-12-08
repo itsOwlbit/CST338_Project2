@@ -18,3 +18,5 @@ eCommerce project using Android Studio
 12/5 - Did I do anything?  Or was this a take a break day?<br><br>
 
 12/6 - Finally have the item database showing on the Admin Item Inventory activity.  I also have toolbar back button working.  Made some progress on the Item edit activity, but not enough to put on GitHub yet.<br><br>
+
+12/7 - Added the Item Detail activity that chains off the Admin Item Inventory activity.  My hope is that both of these activities can be reused in some way for the shopper side.  Almost PASSing half the use cases I have.<br><br>
