@@ -15,4 +15,6 @@ eCommerce project using Android Studio
 
 12/4 - Admin user management side is almost done.  Admin can create new shopper users and set them to active and inactive.  The view is refreshed after add or status change.  Still have to think more about deleting since there has to be a safety to ensure not all admins are deleted.  Admins can't be created right now either.  So only one default admin.  Some files were renamed because this is getting messy.  I did not consider naming conventions because I didn't know what I needed or how I would build this project.  Also worked on AdminInventory.  Two buttons now move between two fragments in the activity.<br><br>
 
-12/5 - 
+12/5 - Did I do anything?  Or was this a take a break day?<br><br>
+
+12/6 - Finally have the item database showing on the Admin Item Inventory activity.  I also have toolbar back button working.  Made some progress on the Item edit activity, but not enough to put on GitHub yet.<br><br>
