@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST338_Project2">
         <activity
+            android:name=".ShopInventory"
+            android:exported="false" />
+        <activity
             android:name=".ItemDetailActivity"
             android:exported="false" />
         <activity

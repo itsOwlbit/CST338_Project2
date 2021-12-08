@@ -2,7 +2,9 @@ package com.example.cst338_project2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,8 @@ public class ItemDetailActivity extends AppCompatActivity {
     EditText itemPriceInput;
     EditText itemUnitInput;
 
+    Switch forSaleToggle;
+
     Button leftBtn;
     Button rightBtn;
 
@@ -58,6 +63,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     String itemName;
     String itemDescription;
     String itemUnit;
+    int isForSale;
 
     private SharedPreferences preferences = null;
 
@@ -107,6 +113,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         qtyInStockInput = findViewById(R.id.qtyInStockValue);
         itemPriceInput = findViewById(R.id.itemPriceValue);
 
+        // Set Switch
+        forSaleToggle = findViewById(R.id.forSaleSwitch);
+
         // Set Buttons
         leftBtn = findViewById(R.id.leftItemButton);
         rightBtn = findViewById(R.id.rightItemButton);
@@ -118,6 +127,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 leftBtn.setText("Clear");
                 rightBtn.setText("Add");
                 deleteLink.setVisibility(View.INVISIBLE);
+                forSaleToggle.setChecked(true);
                 toolbarTitleField.setText("Add Item");
                 break;
             case 2:
@@ -125,12 +135,19 @@ public class ItemDetailActivity extends AppCompatActivity {
                 leftBtn.setText("Reset");
                 rightBtn.setText("Edit");
                 toolbarTitleField.setText("Edit Item");
+                itemNameField.setKeyListener(null);
+                itemNameField.setFocusable(false);
+                itemNameField.setBackground(null);
+                itemUnitInput.setKeyListener(null);
+                itemUnitInput.setFocusable(false);
+                itemUnitInput.setBackground(null);
                 break;
             case 3:
                 // User Buy Item Mode
                 leftBtn.setText("Back");
                 rightBtn.setText("Buy");
                 toolbarTitleField.setText("Item Details");
+                forSaleToggle.setVisibility(View.INVISIBLE);
                 break;
         }
     }
@@ -138,8 +155,9 @@ public class ItemDetailActivity extends AppCompatActivity {
     private void findKeys() {
         preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         modeKey = preferences.getInt(ITEM_VIEW_MODE_KEY, -1);
+        // Mode Key: (1) Admin Adding Item, (2) Admin Edit Item, (3) Shopper Buy Item
 
-        // Admin level for editting item
+        // Admin level for editing item
         if(modeKey == 2) {
             itemId = preferences.getInt(ITEM_KEY, -1);
 
@@ -195,6 +213,13 @@ public class ItemDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        
+        deleteLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteItem();
+            }
+        });
     }
 
     private void clearFields() {
@@ -203,19 +228,26 @@ public class ItemDetailActivity extends AppCompatActivity {
         qtyInStockInput.setText("");
         itemPriceInput.setText("");
         itemUnitInput.setText("");
+        forSaleToggle.setChecked(true);
     }
 
     private boolean addItemToDB() {
         itemName = itemNameField.getText().toString();
         itemDescription = itemDescField.getText().toString();
         itemUnit = itemUnitInput.getText().toString();
+
+        if(forSaleToggle.isChecked()) {
+            isForSale = 1;
+        } else {
+            isForSale = 0;
+        }
         
         if(checkForValidRecord()) {
             if(checkForItemInDatabase()) {
                 Toast.makeText(this, "Duplicate item names not allowed.  Try again.", Toast.LENGTH_SHORT).show();
                 return false;
             } else {
-                item = new Item(itemName, itemDescription, qtyInStock, itemPrice, itemUnit, "", 1);
+                item = new Item(itemName, itemDescription, qtyInStock, itemPrice, itemUnit, "", isForSale);
                 myDao.insert(item);
                 return (checkForItemInDatabase());
             }
@@ -230,41 +262,31 @@ public class ItemDetailActivity extends AppCompatActivity {
         qtyInStockInput.setText(String.valueOf(item.getInStockQty()));
         itemPriceInput.setText(String.valueOf(item.getItemPrice()));
         itemUnitInput.setText(item.getItemUnit());
+        if(item.getIsForSale() == 1) {
+            forSaleToggle.setChecked(true);
+        } else {
+            forSaleToggle.setChecked(false);
+        }
     }
 
     private void editItemInDB() {
-        itemName = itemNameField.getText().toString();
+        itemName = item.getItemName();
         itemDescription = itemDescField.getText().toString();
-        itemUnit = itemUnitInput.getText().toString();
+        itemUnit = item.getItemUnit();
 
-        // check for duplicate names for changed name. TODO: Stop name duplication?
-
-        if(itemName != item.getItemName()) {
-            Item tempItem = myDao.getItemByName(itemName);
-            if (tempItem != null) {
-                Toast.makeText(this, "Name ERROR: creates duplicate name.", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        if(forSaleToggle.isChecked()) {
+            isForSale = 1;
+        } else {
+            isForSale = 0;
         }
 
-//        if(itemName != item.getItemName()) {
-//            Item tempItem = myDao.getItemByName(itemName);
-//            if(tempItem != null) {
-//                Toast.makeText(this, "Name ERROR: creates duplicate name.", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//        }
-
         if(checkForValidRecord()) {
-            item.setItemName(itemName);
             item.setItemDescription(itemDescription);
-            item.setItemUnit(itemUnit);
             item.setInStockQty(qtyInStock);
             item.setItemPrice(itemPrice);
+            item.setIsForSale(isForSale);
             myDao.update(item);
             Toast.makeText(this, item.getItemName() + " has been updated.", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Something went wrong.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -319,5 +341,35 @@ public class ItemDetailActivity extends AppCompatActivity {
     private boolean checkForItemInDatabase() {
         item = myDao.getItemByName(itemName);
         return (item != null);
+    }
+
+    private void deleteItem() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage(R.string.confirmDeleteItem);
+
+        alertBuilder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(ItemDetailActivity.this, "The "
+                        + item.getItemName()
+                        + " was thrown into the void.", Toast.LENGTH_SHORT).show();
+
+                // item deleted
+                myDao.delete(item);
+
+                // go to Admin Inventory
+                Intent intent = new Intent(ItemDetailActivity.this, AdminInventory.class);
+                startActivity(intent);
+            }
+        });
+
+        alertBuilder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+        alertBuilder.create().show();
     }
 }

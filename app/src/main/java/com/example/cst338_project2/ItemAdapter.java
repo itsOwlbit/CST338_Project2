@@ -106,6 +106,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             if(userAccess == 1) {
                 itemBtn.setText("EDIT");
             }
+
+            if(data.getIsForSale() == 1) {
+                itemBtn.setBackgroundColor(Color.parseColor("#B7D7D7"));
+            } else {
+                itemBtn.setBackgroundColor(Color.parseColor("#D7B7D7"));
+            }
         }
     }
 }
