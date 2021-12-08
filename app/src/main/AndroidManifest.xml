@@ -19,9 +19,6 @@
             android:name=".AdminManageUser"
             android:exported="false" />
         <activity
-            android:name=".AdminManageUser"
-            android:exported="false" />
-        <activity
             android:name=".AdminHome"
             android:exported="false" />
         <activity

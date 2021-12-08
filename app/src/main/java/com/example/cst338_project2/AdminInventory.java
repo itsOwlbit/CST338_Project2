@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,8 @@ import java.util.List;
 
 public class AdminInventory extends AppCompatActivity implements IItemRecyclerView {
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
+    private static final String ITEM_VIEW_MODE_KEY = "com.example.cst338_project2.itemViewModeKey";
+    private static final String ITEM_KEY = "com.example.cst338_project2.itemKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
 
     ImageView backImg;          // the image from toolbar_layout to go back
@@ -78,7 +81,6 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
     private void determineUserAccess() {
         preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         userAccess = preferences.getInt(USER_STATUS_KEY, -1);
-        Toast.makeText(this, "Status: " + userAccess, Toast.LENGTH_SHORT).show();
     }
     
     private void buildRecyclerView() {
@@ -101,14 +103,25 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
         addItemsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminInventory.this, "Add coming soon!", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt(ITEM_VIEW_MODE_KEY, 1);
+                editor.commit();
+                Intent intent = new Intent(AdminInventory.this, ItemDetailActivity.class);
+                startActivity(intent);
             }
         });
     }
     
     @Override
     public void onButtonClick(int position) {
-        Toast.makeText(this, "Coming soon! " + position, Toast.LENGTH_SHORT).show();
+        int id = itemList.get(position).getItemId();
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(ITEM_VIEW_MODE_KEY, 2);
+        editor.putInt(ITEM_KEY, id);
+        editor.commit();
+        Intent intent = new Intent(AdminInventory.this, ItemDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -116,6 +129,8 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
         super.onResume();
         // Need to update the adapter with an updated list of items from the database.
         itemAdapter.updateData(myDao.getAllItems());
+        // Need to update itemList so the array size gets updated.
+        itemList = myDao.getAllItems();
         // Do the update on display.
         recyclerView.getAdapter().notifyDataSetChanged();
     }

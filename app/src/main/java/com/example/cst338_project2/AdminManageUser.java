@@ -115,6 +115,9 @@ public class AdminManageUser extends AppCompatActivity implements IManageUserRec
                     //  check if user is in the database (duplicate username is not allowed)
                     if(checkForUserInDatabase()) {
                         Toast.makeText(AdminManageUser.this, username + " is not available.", Toast.LENGTH_SHORT).show();
+                        newUser = null;
+                        usernameField.setText("");
+                        passwordField.setText("");
                     } else {
                         // add user to database and make sure it worked
                         if(addUserToDB()) {
@@ -145,6 +148,16 @@ public class AdminManageUser extends AppCompatActivity implements IManageUserRec
     private boolean addUserToDB() {
         newUser = new User(username, password, 0, 1);
         myDao.insert(newUser);
+
+        // Need to update the adapter with an updated list of users from the database.
+        userAdapter.updateData(myDao.getAllUsers());
+
+        // Need to update itemList so the array size gets updated.
+        userList = myDao.getAllUsers();
+
+        // Do the update on display.
+        recyclerView.getAdapter().notifyDataSetChanged();
+
         return (checkForUserInDatabase());
     }
 
@@ -174,6 +187,7 @@ public class AdminManageUser extends AppCompatActivity implements IManageUserRec
 
         // Need to update the adapter with an updated list of users from the database.
         userAdapter.updateData(myDao.getAllUsers());
+
         // Do the update on display.
         recyclerView.getAdapter().notifyDataSetChanged();
     }

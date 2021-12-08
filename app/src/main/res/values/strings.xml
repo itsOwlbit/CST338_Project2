@@ -35,15 +35,16 @@
     <string name="addUser">Add User</string>
     // Item Inventory
     <string name="welcomeInventory">Welcome to my inventory.</string>
-    <string name="itemName">Item Name</string>
+    <string name="itemName">Item name</string>
     <string name="itemDescription">Short item description.</string>
-    <string name="number">#</string>
+    <string name="inStockQty">Units In Stock: </string>
+    <string name="itemPrice">Per Unit Price (in diamonds): </string>
+    <string name="itemUnit">One Unit Size: </string>
     <string-array name="unitSize">
         <item>item(s)</item>
         <item>stack(s)</item>
     </string-array>
-
-
+    <string name="deleteItem">Delete Item</string>
 
     <string name="temp">temp</string>
     <!-- TODO: Remove or change this placeholder text -->

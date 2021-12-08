@@ -90,22 +90,22 @@ public class MainActivity extends AppCompatActivity {
             myDao.insert(defaultAdmin);
             Item stone = new Item("Stone",
                     "Basic stone for any building project.",
-                    5, 1, 5, "", 1);
+                    5, 1, "5 stacks", "", 1);
             Item deepSlate = new Item("Deep Slate",
                     "A very beautiful and dark building material.",
-                    5, 1, 2, "", 1);
+                    5, 1, "2 stacks", "", 1);
             Item darkOak = new Item("Dark Oak Logs",
                     "For when plain oak or spurce just won't do.",
-                    10, 1, 3, "", 1);
+                    10, 1, "3 stacks", "", 1);
             Item oak = new Item("Oak Logs",
                     "So useful in every build.  Use plain, stripped, or planks.",
-                    20, 1, 5, "", 1);
+                    20, 1, "5 stacks", "", 1);
             Item spruce = new Item("Spruce Logs",
                     "Adds accent color.  Goes great with stone, oak, and dark oak.",
-                    10, 1, 5, "", 1);
+                    10, 1, "5 stacks", "", 1);
             Item pinkSheep = new Item("Purple Cow Sheep",
                     "Comes with name tag and a lead.  You can't dye a cow to get this color.",
-                    0, 1, 1, "", 1);
+                    0, 1, "1 cow", "", 1);
             myDao.insert(stone);
             myDao.insert(deepSlate);
             myDao.insert(darkOak);
