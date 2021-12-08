@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/itemDetailLayout"
+    android:background="@color/dark_gray"
     tools:context=".ItemDetailActivity">
 
 
@@ -15,6 +17,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="20dp"
         android:padding="20dp"
+        android:background="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -60,7 +63,7 @@
                     android:layout_weight="1"
                     android:text="@string/inStockQty"
                     android:layout_gravity="right"
-                    android:gravity="bottom"
+                    android:gravity="center"
                     android:textSize="18sp" />
 
                 <TextView
@@ -70,7 +73,7 @@
                     android:layout_weight="1"
                     android:text="@string/itemPrice"
                     android:layout_gravity="right"
-                    android:gravity="bottom"
+                    android:gravity="center"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -116,14 +119,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/itemUnit"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center"
                 android:gravity="right"
                 android:layout_marginBottom="5dp"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/itemUnitValue"
-                android:layout_width="150dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"

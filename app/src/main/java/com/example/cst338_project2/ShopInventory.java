@@ -1,17 +1,14 @@
 package com.example.cst338_project2;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,13 +19,17 @@ import com.example.cst338_project2.db.MyDao;
 
 import java.util.List;
 
-public class AdminInventory extends AppCompatActivity implements IItemRecyclerView {
+public class ShopInventory extends AppCompatActivity implements IItemRecyclerView {
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
     private static final String ITEM_VIEW_MODE_KEY = "com.example.cst338_project2.itemViewModeKey";
     private static final String ITEM_KEY = "com.example.cst338_project2.itemKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
 
     private SharedPreferences preferences = null;
+    int userAccess;
+
+    private MyDao myDao;
+    private List<Item> itemList;
 
     ImageView backImg;          // the image from toolbar_layout to go back
     TextView toolbarTitleField; // the text for toolbar title
@@ -36,18 +37,11 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
 
     ItemAdapter itemAdapter;
     RecyclerView recyclerView;
-    
-    private Button addItemsBtn;
-
-    private MyDao myDao;
-    private List<Item> itemList;
-
-    int userAccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_inventory);
+        setContentView(R.layout.activity_shop_inventory);
 
         // Get database access
         myDao = AppDatabase.getDatabase(this);
@@ -58,10 +52,9 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
         prepareLayout();
 
         determineUserAccess();
-        
+
         buildRecyclerView();
 
-        // Check for setOnClickListener() events
         checkListeners();
     }
 
@@ -69,19 +62,17 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
         // used to set toolbar
         backImg = findViewById(R.id.backImg);
         toolbarTitleField = findViewById(R.id.toolbarTitle);
-        toolbarTitleField.setTextColor(getResources().getColor(R.color.aqua));
-        toolbarTitleField.setText("Item Inventory");
+        toolbarTitleField.setTextColor(getResources().getColor(R.color.iron));
+        toolbarTitleField.setText("Shop's Inventory");
         logoutField = findViewById(R.id.logoutText);
         logoutField.setVisibility(View.INVISIBLE);
-        
-        addItemsBtn = findViewById(R.id.itemAddButton);
     }
 
     private void determineUserAccess() {
         preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         userAccess = preferences.getInt(USER_STATUS_KEY, -1);
     }
-    
+
     private void buildRecyclerView() {
         itemAdapter = new ItemAdapter(itemList,this, this, userAccess);
         recyclerView = findViewById(R.id.rvItem);
@@ -94,32 +85,21 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AdminInventory.super.onBackPressed();
+                ShopInventory.super.onBackPressed();
             }
         });
 
-        // Add Item click
-        addItemsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt(ITEM_VIEW_MODE_KEY, 1);
-                editor.commit();
-                Intent intent = new Intent(AdminInventory.this, ItemDetailActivity.class);
-                startActivity(intent);
-            }
-        });
     }
-    
+
     @Override
     public void onButtonClick(int position) {
         int id = itemList.get(position).getItemId();
 
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(ITEM_VIEW_MODE_KEY, 2);
+        editor.putInt(ITEM_VIEW_MODE_KEY, 3);
         editor.putInt(ITEM_KEY, id);
         editor.commit();
-        Intent intent = new Intent(AdminInventory.this, ItemDetailActivity.class);
+        Intent intent = new Intent(ShopInventory.this, ItemDetailActivity.class);
         startActivity(intent);
     }
 

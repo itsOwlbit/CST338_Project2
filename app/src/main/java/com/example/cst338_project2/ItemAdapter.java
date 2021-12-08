@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cst338_project2.data.Item;
@@ -105,12 +106,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
             if(userAccess == 1) {
                 itemBtn.setText("EDIT");
-            }
 
-            if(data.getIsForSale() == 1) {
-                itemBtn.setBackgroundColor(Color.parseColor("#B7D7D7"));
-            } else {
-                itemBtn.setBackgroundColor(Color.parseColor("#D7B7D7"));
+                if(data.getIsForSale() == 1) {
+                    itemBtn.setBackgroundColor(Color.parseColor("#B7D7D7"));
+                } else {
+                    itemBtn.setBackgroundColor(Color.parseColor("#D7B7D7"));
+                }
             }
         }
     }

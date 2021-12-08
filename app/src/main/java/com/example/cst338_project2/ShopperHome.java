@@ -103,7 +103,8 @@ public class ShopperHome extends AppCompatActivity {
         shopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ShopperHome.this, "Shop screen not set up yet.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ShopperHome.this, ShopInventory.class);
+                startActivity(intent);
             }
         });
 

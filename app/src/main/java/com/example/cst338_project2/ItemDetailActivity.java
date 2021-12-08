@@ -1,6 +1,7 @@
 package com.example.cst338_project2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -41,6 +42,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private MyDao myDao;
 
+    ConstraintLayout detailLayout;
+
     TextView itemNameField;
     TextView itemDescField;
     TextView qtyInStockField;
@@ -69,6 +72,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     int modeKey;
     int itemId = -1;
+    int userId = -1;
 
     Item item;
 
@@ -99,6 +103,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         toolbarTitleField.setTextColor(getResources().getColor(R.color.aqua));
         logoutField = findViewById(R.id.logoutText);
         logoutField.setVisibility(View.INVISIBLE);
+
+        // Background
+        detailLayout = findViewById(R.id.itemDetailLayout);
 
         // Text
         itemNameField = findViewById(R.id.itemNameText);
@@ -144,10 +151,30 @@ public class ItemDetailActivity extends AppCompatActivity {
                 break;
             case 3:
                 // User Buy Item Mode
-                leftBtn.setText("Back");
+                leftBtn.setText("");
                 rightBtn.setText("Buy");
                 toolbarTitleField.setText("Item Details");
+                itemNameField.setKeyListener(null);
+                itemNameField.setFocusable(false);
+                itemNameField.setBackground(null);
+                itemDescField.setKeyListener(null);
+                itemDescField.setFocusable(false);
+                itemDescField.setBackground(null);
+                itemUnitInput.setKeyListener(null);
+                itemUnitInput.setFocusable(false);
+                itemUnitInput.setBackground(null);
+                qtyInStockInput.setKeyListener(null);
+                qtyInStockInput.setFocusable(false);
+                qtyInStockInput.setBackground(null);
+                itemPriceInput.setKeyListener(null);
+                itemPriceInput.setFocusable(false);
+                itemPriceInput.setBackground(null);
+                leftBtn.setVisibility(View.INVISIBLE);
+                deleteLink.setVisibility(View.INVISIBLE);
                 forSaleToggle.setVisibility(View.INVISIBLE);
+                qtyInStockField.setText("QTY in stock:  ");
+                itemPriceField.setText("Price (in diamonds): ");
+                itemUnitField.setText("Item size:  ");
                 break;
         }
     }
@@ -155,10 +182,12 @@ public class ItemDetailActivity extends AppCompatActivity {
     private void findKeys() {
         preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         modeKey = preferences.getInt(ITEM_VIEW_MODE_KEY, -1);
+//        userId = preferences.getInt(USER_STATUS_KEY, -1);
+
         // Mode Key: (1) Admin Adding Item, (2) Admin Edit Item, (3) Shopper Buy Item
 
         // Admin level for editing item
-        if(modeKey == 2) {
+        if(modeKey == 2 || modeKey == 3) {
             itemId = preferences.getInt(ITEM_KEY, -1);
 
             // Failed to get itemId so put screen at add item instead of edit.
@@ -188,7 +217,6 @@ public class ItemDetailActivity extends AppCompatActivity {
                         resetFields();
                         break;
                     case 3:
-                        backToInventoryView();
                         break;
                 }
             }
@@ -288,10 +316,6 @@ public class ItemDetailActivity extends AppCompatActivity {
             myDao.update(item);
             Toast.makeText(this, item.getItemName() + " has been updated.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void backToInventoryView() {
-        Toast.makeText(this, "Back to inventory view coming soon.", Toast.LENGTH_SHORT).show();
     }
 
     private void buyItem() {
