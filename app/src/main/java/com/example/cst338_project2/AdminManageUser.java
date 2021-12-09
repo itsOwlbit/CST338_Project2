@@ -21,14 +21,23 @@ import com.example.cst338_project2.interfaces.IManageUserRecyclerView;
 import java.util.List;
 
 /**
+ * Title: AdminManageUser.java
+ * Description: This is where an admin can see who all the users are, but it does not show
+ * passwords.  An admin can create a new user.
+ * Notes: At this time admin accounts cannot be created or deleted.  The feature to delete
+ * users are disabled since it can potentially break the way the minecraft world works, and
+ * that would be bad.  The key elements for getting the delete functionality is coded in, but
+ * needs testing and scenario testing to ensure it works as intended.  The truth is I prefer
+ * disabling accounts, so if you want delete, make it happen.
+ * Design File: activity_admin_manageruser.xml
+ * Author: Juli S.
+ * Date: 12/04/2021
+ *
  * The below linked helped provide the start for the recyclerview used.
  * https://medium.com/@codelia.developer/simple-android-recyclerview-list-using-cardview-d48524bedc6a
  *
  * This for clickable recyclerview?
  * https://www.youtube.com/watch?v=7GPUpvcU1FE
- * TODO: Add delete?  Remove deactivate?  Add admins not just shoppers?  Make sure all admins are not deleted.
- * TODO: back/up button
- * TODO: logout link
  */
 public class AdminManageUser extends AppCompatActivity implements IManageUserRecyclerView {
     ImageView backImg;          // the image from toolbar_layout to go back
@@ -116,7 +125,8 @@ public class AdminManageUser extends AppCompatActivity implements IManageUserRec
                 } else {
                     //  check if user is in the database (duplicate username is not allowed)
                     if(checkForUserInDatabase()) {
-                        Toast.makeText(AdminManageUser.this, username + " is not available.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminManageUser.this, username
+                                + " is not available.", Toast.LENGTH_SHORT).show();
                         newUser = null;
                         usernameField.setText("");
                         passwordField.setText("");
@@ -128,13 +138,16 @@ public class AdminManageUser extends AppCompatActivity implements IManageUserRec
                             // Do the update on display.
                             recyclerView.getAdapter().notifyDataSetChanged();
 
-                            Toast.makeText(AdminManageUser.this, newUser.getUserName() + " was added.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminManageUser.this, newUser.getUserName()
+                                    + " was added.", Toast.LENGTH_SHORT).show();
 
                             newUser = null;
                             usernameField.setText("");
                             passwordField.setText("");
                         } else {
-                            Toast.makeText(AdminManageUser.this, "Something went wrong.  Could not add " + username, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminManageUser.this,
+                                    "Something went wrong.  Could not add " + username,
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -189,7 +202,8 @@ public class AdminManageUser extends AppCompatActivity implements IManageUserRec
 
         // Need to update the adapter with an updated list of users from the database.
         userAdapter.updateData(myDao.getAllUsers());
-
+        // update list for activity.
+        userList = myDao.getAllUsers();
         // Do the update on display.
         recyclerView.getAdapter().notifyDataSetChanged();
     }

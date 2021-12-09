@@ -31,6 +31,20 @@ import org.w3c.dom.Text;
 
 import java.util.InputMismatchException;
 
+/**
+ * Title: ItemDetailActivity.java
+ * Description: This is a holy hell of a mess.  This screen is an item display for ALL
+ * needs for displaying an items details.  This is used for Admin View for specific items.
+ * This is used by Admin to add a new Item to Inventory.  This is also used by a Shopper
+ * to view details for an item to allow them to purchase the item.  Preferences are
+ * heavily used and relied on to convey which of the three modes to display and how
+ * the user interacts with the buttons.  This allowed me to create one activity that
+ * does three.  How useful is that?
+ * Design File: activity_item_detail.xml
+ * Author: Juli S.
+ * Date: 12/07/2021
+ */
+
 public class ItemDetailActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
@@ -194,7 +208,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
             // Failed to get itemId so put screen at add item instead of edit.
             if(itemId == -1) {
-                Toast.makeText(this, "Failed to retrieve item id.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed to retrieve item id.",
+                        Toast.LENGTH_SHORT).show();
                 modeKey = 1;
             }
         }
@@ -230,7 +245,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                 switch(modeKey) {
                     case 1:
                         if(addItemToDB()) {
-                            Toast.makeText(ItemDetailActivity.this, itemName + " added to Inventory.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ItemDetailActivity.this, itemName
+                                    + " added to Inventory.", Toast.LENGTH_SHORT).show();
                             clearFields();
                         }
                         break;
@@ -274,10 +290,12 @@ public class ItemDetailActivity extends AppCompatActivity {
         
         if(checkForValidRecord()) {
             if(checkForItemInDatabase()) {
-                Toast.makeText(this, "Duplicate item names not allowed.  Try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Duplicate item names not allowed.  Try again.",
+                        Toast.LENGTH_SHORT).show();
                 return false;
             } else {
-                item = new Item(itemName, itemDescription, qtyInStock, itemPrice, itemUnit, "", isForSale);
+                item = new Item(itemName, itemDescription, qtyInStock, itemPrice,
+                        itemUnit, "", isForSale);
                 myDao.insert(item);
                 return (checkForItemInDatabase());
             }
@@ -316,7 +334,8 @@ public class ItemDetailActivity extends AppCompatActivity {
             item.setItemPrice(itemPrice);
             item.setIsForSale(isForSale);
             myDao.update(item);
-            Toast.makeText(this, item.getItemName() + " has been updated.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, item.getItemName() + " has been updated.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -334,7 +353,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         // Must have at least 1 in stock.
         if(item.getInStockQty() > 0) {
-            Toast.makeText(this, "You have just bought " + item.getItemName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You have just bought " + item.getItemName(),
+                    Toast.LENGTH_SHORT).show();
 
             // Purchase
             Order newOrder = new Order(uId, iId, cost, description, 0);
@@ -353,14 +373,16 @@ public class ItemDetailActivity extends AppCompatActivity {
     private boolean checkForValidRecord() {
         if (TextUtils.isEmpty(itemName) || TextUtils.isEmpty(itemDescription)
                 || TextUtils.isEmpty(itemUnit)) {
-            Toast.makeText(this, "All fields must be filled.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "All fields must be filled.",
+                    Toast.LENGTH_SHORT).show();
             return false;
         } else {
             // Check for valid Quantity input
             try {
                 qtyInStock = Integer.parseInt(qtyInStockInput.getText().toString());
             } catch (NumberFormatException e) {
-                Toast.makeText(this, "Please enter Units In Stock.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter Units In Stock.",
+                        Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -368,21 +390,24 @@ public class ItemDetailActivity extends AppCompatActivity {
             try {
                 itemPrice = Integer.parseInt(itemPriceInput.getText().toString());
             } catch (NumberFormatException e) {
-                Toast.makeText(this, "Please enter Per Unit Price", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter Per Unit Price",
+                        Toast.LENGTH_SHORT).show();
                 return false;
             }
 
             // Quantity must be 0 or more
             if (qtyInStock < 0) {
                 qtyInStockInput.setText("");
-                Toast.makeText(this, "Cannot have negative units in stock.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cannot have negative units in stock.",
+                        Toast.LENGTH_SHORT).show();
                 return false;
             }
 
             // Price must be 1 or more
             if (itemPrice <= 0) {
                 itemPriceInput.setText("");
-                Toast.makeText(this, "Item must cost 1 diamond or more.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Item must cost 1 diamond or more.",
+                        Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -410,7 +435,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                 myDao.delete(item);
 
                 // go to Admin Inventory
-                Intent intent = new Intent(ItemDetailActivity.this, AdminInventory.class);
+                Intent intent = new Intent(ItemDetailActivity.this,
+                        AdminInventory.class);
                 startActivity(intent);
             }
         });

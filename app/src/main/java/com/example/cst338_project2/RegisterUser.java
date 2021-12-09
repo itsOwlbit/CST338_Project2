@@ -18,6 +18,17 @@ import com.example.cst338_project2.db.MyDao;
 
 //import java.util.List;
 
+/**
+ * Title: RegisterUser.java
+ * Description: A new user (or returning user to previously deleted their account) can create
+ * a new account with a unique name here.  If they remember they have an active account
+ * then they can just use the Signin link to go to the Login screen.  Creating a new account
+ * will auto log them in and set shared preferences.
+ * Design File: activity_register_user.xml
+ * Author: Juli S.
+ * Date: 11/29/2021
+ */
+
 public class RegisterUser extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
@@ -77,18 +88,22 @@ public class RegisterUser extends AppCompatActivity {
                 } else {
                     //  check if user is in the database (duplicate username is not allowed)
                     if(checkForUserInDatabase()) {
-                        Toast.makeText(RegisterUser.this, username + " is not available.  Please try another.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterUser.this, username
+                                + " is not available.  Please try another.",
+                                Toast.LENGTH_SHORT).show();
                     } else {
                         // add user to database and make sure it worked
                         if(addUserToDB()) {
-                            addUserToPreference(userId); // TODO: Update Preferences to work
+                            addUserToPreference(userId);
 
                             // Can only create new shopper users at register screen
                             Intent intent = new Intent(v.getContext(), ShopperHome.class);
-                            intent.putExtra(USER_ID_KEY, user.getUserID()); // Todo: is this correct?
+                            intent.putExtra(USER_ID_KEY, user.getUserID());
                             startActivity(intent);
                         } else {
-                            Toast.makeText(RegisterUser.this, "Something went wrong.  Could not add " + username, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterUser.this,
+                                    "Something went wrong.  Could not add "
+                                            + username, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

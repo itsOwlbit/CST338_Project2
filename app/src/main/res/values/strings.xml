@@ -46,9 +46,4 @@
     </string-array>
     <string name="deleteItem">Delete Item</string>
     <string name="confirmDeleteItem">Are you sure you want to permanently delete this item?</string>
-
-    <string name="temp">temp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>

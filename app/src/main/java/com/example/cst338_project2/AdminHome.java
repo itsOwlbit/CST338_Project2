@@ -18,6 +18,16 @@ import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
 
+/**
+ * Title: AdminHome.java
+ * Description: This is screen that admins either auto login to if they have saved shared
+ * preferences, or where they start after logging in with valid credentials.  This screen
+ * provides the admin with all the access they need on the Admin Home screen.
+ * Design File: activity_admin_home.xml
+ * Author: Juli S.
+ * Date: 11/30/2021
+ */
+
 public class AdminHome extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
@@ -53,14 +63,10 @@ public class AdminHome extends AppCompatActivity {
         setUserPreferences();
 
         // Get userId's object from database
-        retrieveUserFromDatabase(); // TODO: Is it possible for this to fail?  null user?
+        retrieveUserFromDatabase();
 
         // Initialize widgets and elements for display layout
         prepareLayout();
-
-        // TODO: Should I put this in prepareLayout()?
-        welcomeMessage = "Welcome " + user.getUserName();
-        welcomeField.setText(welcomeMessage);
 
         // Check for setOnClickListener() events
         checkListeners();
@@ -90,6 +96,9 @@ public class AdminHome extends AppCompatActivity {
         inventoryBtn = findViewById(R.id.inventoryButton);
         salesBtn = findViewById(R.id.salesButton);
         usersBtn = findViewById(R.id.usersButton);
+
+        welcomeMessage = "Welcome " + user.getUserName();
+        welcomeField.setText(welcomeMessage);
     }
 
     private void checkListeners() {
@@ -114,7 +123,8 @@ public class AdminHome extends AppCompatActivity {
         salesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminHome.this, "Sales Report screen not set up yet.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminHome.this, "Sales Report screen not set up yet.",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -129,7 +139,6 @@ public class AdminHome extends AppCompatActivity {
     }
 
     private void logoutUser() {
-        // TODO: Create custom alert dialog for logout
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
         alertBuilder.setMessage(R.string.logoutQuestion);
 

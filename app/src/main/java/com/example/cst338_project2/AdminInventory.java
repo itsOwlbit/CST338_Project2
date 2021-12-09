@@ -21,6 +21,16 @@ import com.example.cst338_project2.interfaces.IItemRecyclerView;
 
 import java.util.List;
 
+/**
+ * Title: AdminInventory.java
+ * Description: This is where an admin can see all the inventory for the store.  For more
+ * details, they click the view button.  This screen shows a basic amount of information
+ * that is useful for at the glance looks.
+ * Design File: activity_admin_inventory.xml
+ * Author: Juli S.
+ * Date: 12/04/2021
+ */
+
 public class AdminInventory extends AppCompatActivity implements IItemRecyclerView {
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
     private static final String ITEM_VIEW_MODE_KEY = "com.example.cst338_project2.itemViewModeKey";
@@ -104,7 +114,8 @@ public class AdminInventory extends AppCompatActivity implements IItemRecyclerVi
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putInt(ITEM_VIEW_MODE_KEY, 1);
                 editor.commit();
-                Intent intent = new Intent(AdminInventory.this, ItemDetailActivity.class);
+                Intent intent = new Intent(AdminInventory.this,
+                        ItemDetailActivity.class);
                 startActivity(intent);
             }
         });

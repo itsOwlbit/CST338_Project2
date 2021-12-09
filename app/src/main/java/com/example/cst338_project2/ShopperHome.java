@@ -123,7 +123,8 @@ public class ShopperHome extends AppCompatActivity {
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShopperHome.this, ShopperOrderHistory.class);
+                Intent intent = new Intent(ShopperHome.this,
+                        ShopperOrderHistory.class);
                 startActivity(intent);
             }
         });
@@ -132,15 +133,12 @@ public class ShopperHome extends AppCompatActivity {
         deleteAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Maybe only delete accounts that have no orders but disable those that do.
-                // TODO: What about deleting admin accounts?
                 confirmDeleteAccount();
             }
         });
     }
 
     private void logoutUser() {
-        // TODO: Create custom alert dialog for logout
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
         alertBuilder.setMessage(R.string.logoutQuestion);
 
@@ -173,7 +171,6 @@ public class ShopperHome extends AppCompatActivity {
     }
 
     private void confirmDeleteAccount() {
-        // TODO: Create custom alert dialog for logout
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
         alertBuilder.setMessage(R.string.confirmDeleteAccount);
 
