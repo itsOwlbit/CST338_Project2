@@ -12,11 +12,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
+
+/**
+ * Title: ShopperHome.java
+ * Description: The home screen for shopper users.  Provides navigation to various areas a
+ * shopper has access to.  The logout clears user shared preferences.  The delete account
+ * link deletes (actually it is more deactivate right now) the user's account and sends them
+ * back to the login screen.  Shared preferences are also cleared.
+ * Design File: activity_shopper_home.xml
+ * Author: Juli S.
+ * Date: 11/28/2021
+ */
 
 public class ShopperHome extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
@@ -53,14 +63,10 @@ public class ShopperHome extends AppCompatActivity {
         setUserPreferences();
 
         // Get userId's object from database
-        retrieveUserFromDatabase(); // TODO: Is it possible for this to fail?  null user?
+        retrieveUserFromDatabase();
 
         // Initialize widgets and elements for display layout
         prepareLayout();
-
-        // TODO: Should I put this in prepareLayout()?
-        welcomeMessage = "Welcome " + user.getUserName();
-        welcomeField.setText(welcomeMessage);
 
         // Check for setOnClickListener() events
         checkListeners();
@@ -68,6 +74,8 @@ public class ShopperHome extends AppCompatActivity {
 
     private void setUserPreferences() {
         preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
+        // userId gets overridden by the intent's Extra, but above line is needed for
+        // logout and saving preferences.
         userId = preferences.getInt(USER_ID_KEY, -1);
     }
 
@@ -88,6 +96,9 @@ public class ShopperHome extends AppCompatActivity {
         shopBtn = findViewById(R.id.shopButton);
         orderBtn = findViewById(R.id.ordersButton);
         deleteAccountLink = findViewById(R.id.deleteAccountLink);
+
+        welcomeMessage = "Welcome " + user.getUserName();
+        welcomeField.setText(welcomeMessage);
     }
 
     private void checkListeners() {
@@ -112,7 +123,8 @@ public class ShopperHome extends AppCompatActivity {
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ShopperHome.this, "Order screen not set up yet.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ShopperHome.this, ShopperOrderHistory.class);
+                startActivity(intent);
             }
         });
 

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cst338_project2.data.Item;
 import com.example.cst338_project2.db.AppDatabase;
@@ -19,14 +18,28 @@ import com.example.cst338_project2.db.MyDao;
 
 import java.util.List;
 
+/**
+ * Title: ShopInventory.java
+ * Description: This is the shopper's store front where they can see a list of items for sale.
+ * Some items may be out of stock though.  To get more details or to purchase an item, the
+ * shopper just clicks the View link.  Future improvements can include a filter for searching
+ * though the items.  That is out of scope of this assignment and its time constraints.
+ * Design File: activity_shop_inventory.xml
+ * Author: Juli S.
+ * Date: 12/08/2021
+ */
+
 public class ShopInventory extends AppCompatActivity implements IItemRecyclerView {
+    // Key needed for Adapter
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
+    // Item keys are needed for ItemDetailsActivity
     private static final String ITEM_VIEW_MODE_KEY = "com.example.cst338_project2.itemViewModeKey";
     private static final String ITEM_KEY = "com.example.cst338_project2.itemKey";
+    // Gets the main preference key
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
 
     private SharedPreferences preferences = null;
-    int userAccess;
+    int userAccess; // 1 for admin, 0 or shopper (needed for Adapter)
 
     private MyDao myDao;
     private List<Item> itemList;
@@ -49,13 +62,18 @@ public class ShopInventory extends AppCompatActivity implements IItemRecyclerVie
         // Get list of items
         itemList = myDao.getAllItems();
 
-        prepareLayout();
+        preparePreferences();
 
-        determineUserAccess();
+        prepareLayout();
 
         buildRecyclerView();
 
         checkListeners();
+    }
+
+    private void preparePreferences() {
+        preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
+        userAccess = preferences.getInt(USER_STATUS_KEY, -1);
     }
 
     private void prepareLayout() {
@@ -66,11 +84,6 @@ public class ShopInventory extends AppCompatActivity implements IItemRecyclerVie
         toolbarTitleField.setText("Shop's Inventory");
         logoutField = findViewById(R.id.logoutText);
         logoutField.setVisibility(View.INVISIBLE);
-    }
-
-    private void determineUserAccess() {
-        preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
-        userAccess = preferences.getInt(USER_STATUS_KEY, -1);
     }
 
     private void buildRecyclerView() {
@@ -93,18 +106,21 @@ public class ShopInventory extends AppCompatActivity implements IItemRecyclerVie
 
     @Override
     public void onButtonClick(int position) {
+        // This is for the View button
         int id = itemList.get(position).getItemId();
 
+        // Store preferences needed for ItemDetailActivity, which uses switch statements.
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(ITEM_VIEW_MODE_KEY, 3);
         editor.putInt(ITEM_KEY, id);
-        editor.commit();
+        editor.apply();
         Intent intent = new Intent(ShopInventory.this, ItemDetailActivity.class);
         startActivity(intent);
     }
 
     @Override
     protected void onResume() {
+        // To refresh recyclerview and reset list size from any changes.
         super.onResume();
         // Need to update the adapter with an updated list of items from the database.
         itemAdapter.updateData(myDao.getAllItems());

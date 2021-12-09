@@ -8,16 +8,18 @@ import androidx.room.RoomDatabase;
 
 import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.data.Item;
+import com.example.cst338_project2.data.Order;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Item.class}, version= 1)
+@Database(entities = {User.class, Item.class, Order.class}, version= 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String DB_NAME = "MY_DATABASE";
     public static final String USER_TABLE = "USER_TABLE";
     public static final String ITEM_TABLE = "ITEM_TABLE";
+    public static final String ORDER_TABLE = "ORDER_TABLE";
 
     public abstract MyDao getMyDao();
 
