@@ -10,7 +10,16 @@ import android.os.Handler;
 import android.widget.Toast;
 
 /**
- * Created (SplashActivity.java and activity_splash.xml) with the help of:
+ * Title: SplashActivity.java
+ * Description: This is the first thing that the users see when they start the application.  It
+ * serves no function other than to be pretty.  It shows the shop's name and a status
+ * circle that just spins for no reason.  The next screen is MainActivity.java.
+ * Design File: activity_splash.xml.
+ * Author: Juli S.
+ * Date: 11/282021
+ *
+ * ADDITIONAL NOTES:
+ * Created with the help of:
  * YouTube creator: Easy Tuto
  * YouTube title: How to make Splash Screen (Loading Screen) | Android Studio | Beginners Tutorial
  * YouTube date: January 5, 2020
@@ -22,8 +31,6 @@ public class SplashActivity extends AppCompatActivity {
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
 
     private SharedPreferences preferences = null;
-
-    private int userId = -1;        // default userId if a valid userId is not received
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,5 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, 2000);
-
     }
 }

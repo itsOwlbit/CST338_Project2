@@ -19,10 +19,26 @@ import com.example.cst338_project2.db.MyDao;
 
 import java.util.List;
 
+/**
+ * Title: MainActivity.java
+ * Description:  This is the user login screen.  Users who already have shared preferences set will
+ * automatically login to their status access page.  Admin goes to AdminHome.java and Shopper
+ * goes to ShopperHome.java.  Users have 3 tries to get the correct login credentials before
+ * the program closes.  There is also a link for new users to create an account in
+ * RegisterUser.java activity.
+ * Design File: activity_main.xml
+ * Author: Juli S.
+ * Date: 11/28/2021
+ */
+
 public class MainActivity extends AppCompatActivity {
+    // The key for the saved logged in user credentials.
     private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
+    // Saves the key for whether the user is admin or shopper without checking User object
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
+    // Key for the preferences
     private static final String PREFERENCES_KEY = "com.example.cst338_project2.preferencesKey";
+
     private static final int MAX_LOGIN_ATTEMPTS = 3; // Used to prevent brute force guessing
 
     TextView usernameField;      // the TextView for username to be entered.
@@ -82,8 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<User> users = myDao.getAllUsers();
         if(users.size() <= 0) {
-            // create default users if User table is empty.
-            // TODO: Update default user/admin
+            // create default users/items if User table is empty.
             User defaultUser = new User("testuser1", "testuser1", 0, 1);
             User defaultAdmin = new User("admin2", "admin2", 1, 1);
             myDao.insert(defaultUser);
@@ -200,10 +215,10 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear(); // just a check to clear preferences before adding a new one
-        editor.commit();
+        editor.apply();
         editor.putInt(USER_ID_KEY, userId);
         editor.putInt(USER_STATUS_KEY, user.getIsAdmin());
-        editor.commit();
+        editor.apply();
     }
 
     @Override

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cst338_project2.data.Item;
+import com.example.cst338_project2.data.Order;
 import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
@@ -31,6 +32,7 @@ import org.w3c.dom.Text;
 import java.util.InputMismatchException;
 
 public class ItemDetailActivity extends AppCompatActivity {
+    private static final String USER_ID_KEY = "com.example.cst338_project2.userIdKey";
     private static final String USER_STATUS_KEY = "com.example.cst338_project2.userStatusKey";
     private static final String ITEM_VIEW_MODE_KEY = "com.example.cst338_project2.itemViewModeKey";
     private static final String ITEM_KEY = "com.example.cst338_project2.itemKey";
@@ -182,7 +184,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     private void findKeys() {
         preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         modeKey = preferences.getInt(ITEM_VIEW_MODE_KEY, -1);
-//        userId = preferences.getInt(USER_STATUS_KEY, -1);
+        userId = preferences.getInt(USER_ID_KEY, -1);
 
         // Mode Key: (1) Admin Adding Item, (2) Admin Edit Item, (3) Shopper Buy Item
 
@@ -319,7 +321,33 @@ public class ItemDetailActivity extends AppCompatActivity {
     }
 
     private void buyItem() {
-        Toast.makeText(this, "Buy items coming soon.", Toast.LENGTH_SHORT).show();
+        int uId;    // buyers id
+        int iId;    // item id
+        int cost;   // one unit item cost
+        String description;
+
+        uId = userId;
+        iId = item.getItemId();
+        cost = item.getItemPrice();
+
+        description = item.getItemName() + " (" + item.getItemUnit() + ")";
+
+        // Must have at least 1 in stock.
+        if(item.getInStockQty() > 0) {
+            Toast.makeText(this, "You have just bought " + item.getItemName(), Toast.LENGTH_SHORT).show();
+
+            // Purchase
+            Order newOrder = new Order(uId, iId, cost, description, 0);
+            myDao.insert(newOrder);
+
+            // Update qty in stock
+            item.setInStockQty(item.getInStockQty() - 1);
+            myDao.update(item);
+
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Sorry, none for sale.", Toast.LENGTH_SHORT).show();
+        }
     }
     
     private boolean checkForValidRecord() {

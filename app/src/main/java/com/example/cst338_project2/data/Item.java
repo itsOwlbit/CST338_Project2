@@ -30,7 +30,6 @@ public class Item {
         this.isForSale = isForSale;
     }
 
-    // TODO: Should some not have setters?
     public int getItemId() {
         return itemId;
     }

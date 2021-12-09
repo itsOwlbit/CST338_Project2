@@ -1,17 +1,14 @@
 package com.example.cst338_project2;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cst338_project2.data.Item;
@@ -104,6 +101,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             itemInStockField.setText(qtyString);
             itemDescriptionField.setText(data.getItemDescription());
 
+            // Admin is 1.  Shopper is 0.
             if(userAccess == 1) {
                 itemBtn.setText("EDIT");
 
