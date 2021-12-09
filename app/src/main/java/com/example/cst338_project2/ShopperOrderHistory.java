@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cst338_project2.adapters.OrderAdapter;
+import com.example.cst338_project2.data.Item;
 import com.example.cst338_project2.data.Order;
 import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
@@ -108,8 +109,37 @@ public class ShopperOrderHistory extends AppCompatActivity implements IOrderRecy
 
     @Override
     public void onButtonClick(int position) {
+        // find order entry in Order db
         int id = orderList.get(position).getOrderId();
+        Order returnOrder = myDao.getOrderById(id);
 
-        Toast.makeText(this, "stuff goes here " + id, Toast.LENGTH_SHORT).show();
+        // find returned item's entry in Item db
+        int itemId = returnOrder.getBoughtItemId();
+        Item returnedItem = myDao.getItemById(itemId);
+
+        // check if item exists
+        if(returnedItem == null) {
+            // Item was discontinued, thus is deleted from Item db
+            // Item is just thrown into the void, cause why not?
+            myDao.delete(returnOrder);
+            Toast.makeText(this, "Return successful."
+                    + "  Discontinued item thrown into the void.", Toast.LENGTH_SHORT).show();
+        } else {
+            // Item is in db
+            // Item qty updated and order deleted.  Return completed.
+            returnedItem.setInStockQty(returnedItem.getInStockQty() + 1);
+            myDao.update(returnedItem);
+            myDao.delete(returnOrder);
+            Toast.makeText(this, "Return successful.  "
+                    + returnedItem.getItemName() + " is returned to inventory.",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        // Need to update the adapter with an updated list of orders from the database.
+        orderAdapter.updateData(myDao.getAllOrdersByUserId(userId));
+        // update list for activity
+        orderList = myDao.getAllOrdersByUserId(userId);
+        // Do the update on display.
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
