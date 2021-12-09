@@ -1,4 +1,4 @@
-package com.example.cst338_project2;
+package com.example.cst338_project2.interfaces;
 
 /**
  * Interface for the recyclerview to help provide click functionality.

@@ -1,4 +1,4 @@
-package com.example.cst338_project2;
+package com.example.cst338_project2.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cst338_project2.R;
 import com.example.cst338_project2.data.Item;
+import com.example.cst338_project2.interfaces.IItemRecyclerView;
 
 import java.util.List;
 

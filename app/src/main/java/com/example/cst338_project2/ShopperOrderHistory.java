@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cst338_project2.adapters.OrderAdapter;
 import com.example.cst338_project2.data.Order;
 import com.example.cst338_project2.data.User;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
+import com.example.cst338_project2.interfaces.IOrderRecyclerView;
 
 import java.util.List;
 

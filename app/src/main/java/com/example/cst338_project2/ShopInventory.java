@@ -12,9 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cst338_project2.adapters.ItemAdapter;
 import com.example.cst338_project2.data.Item;
 import com.example.cst338_project2.db.AppDatabase;
 import com.example.cst338_project2.db.MyDao;
+import com.example.cst338_project2.interfaces.IItemRecyclerView;
 
 import java.util.List;
 
