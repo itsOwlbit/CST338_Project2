@@ -10,13 +10,14 @@
         <entry key="app/src/main/res/layout/activity_admin_inventory.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_admin_manage_user.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_admin_manageuser.xml" value="0.34010416666666665" />
+        <entry key="app/src/main/res/layout/activity_admin_sales_report.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_item_detail.xml" value="0.384375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_manage_user.xml" value="0.32314814814814813" />
         <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_shop_inventory.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_shopper_home.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_shopper_order_history.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/layout/activity_shopper_order_history.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_your_craft_splash.xml" value="0.46296296296296297" />
         <entry key="app/src/main/res/layout/custom_toast_layout.xml" value="0.5009259259259259" />

@@ -46,4 +46,6 @@
     </string-array>
     <string name="deleteItem">Delete Item</string>
     <string name="confirmDeleteItem">Are you sure you want to permanently delete this item?</string>
+    <string name="temp">temp</string>
+    <string name="orderReturn">Are you sure you want to do a return?</string>
 </resources>

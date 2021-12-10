@@ -123,8 +123,8 @@ public class AdminHome extends AppCompatActivity {
         salesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminHome.this, "Sales Report screen not set up yet.",
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminHome.this, AdminSalesReport.class);
+                startActivity(intent);
             }
         });
 

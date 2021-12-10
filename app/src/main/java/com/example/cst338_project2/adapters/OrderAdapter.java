@@ -6,12 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cst338_project2.R;
 import com.example.cst338_project2.data.Order;
+import com.example.cst338_project2.data.User;
+import com.example.cst338_project2.db.AppDatabase;
+import com.example.cst338_project2.db.MyDao;
 import com.example.cst338_project2.interfaces.IOrderRecyclerView;
 
 import java.util.List;
@@ -23,13 +27,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     private LayoutInflater inflater;
     private Context context;
     private int userAccess;
+    private List<User> userList;
 
-    public OrderAdapter(List<Order> orderList, Context context, IOrderRecyclerView recyclerViewInterface, int userAccess) {
+    User userBuyer;
+
+    public OrderAdapter(List<Order> orderList, Context context,
+                        IOrderRecyclerView recyclerViewInterface,
+                        int userAccess, List<User> userList) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.orders = orderList;
         this.recyclerViewInterface = recyclerViewInterface;
         this.userAccess = userAccess;
+        this.userList = userList;
     }
 
     // Total number of rows
@@ -91,14 +101,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             int tempInt;
             String tempStr;
 
-            tempStr = "Order ID: " + data.getOrderId();
+            tempStr = "Order ID #" + data.getOrderId();
             orderIdField.setText(tempStr);
 
             tempStr = "(" + data.getOrderPrice() + " diamonds)";
             pricePaidField.setText(tempStr);
 
-            if(userAccess == 1) {
-                shopperNameField.setText("Coming soon");
+            tempStr = "Shopper not found.";
+
+            if(userAccess == 1 && userList != null) {
+                for(int i = 0; i < userList.size(); i++) {
+                    if(userList.get(i).getUserID() == data.getBuyerId()) {
+                        tempStr = "Shopper Name: " + userList.get(i).getUserName();
+                        break;
+                    }
+                }
+
+                shopperNameField.setText(tempStr);
+
+                orderBtn.setVisibility(View.INVISIBLE);
             } else {
                 shopperNameField.setVisibility(View.GONE);;
             }

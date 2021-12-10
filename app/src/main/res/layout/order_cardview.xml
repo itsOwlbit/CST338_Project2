@@ -59,8 +59,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Shopper Id"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/descriptionText"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:text="Item description."
                     android:textColor="@color/gray"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
