@@ -94,6 +94,7 @@ public class RegisterUser extends AppCompatActivity {
                     } else {
                         // add user to database and make sure it worked
                         if(addUserToDB()) {
+                            userId = user.getUserID();
                             addUserToPreference(userId);
 
                             // Can only create new shopper users at register screen
@@ -122,7 +123,6 @@ public class RegisterUser extends AppCompatActivity {
 
     private boolean checkForUserInDatabase() {
         user = myDao.getUserByUsername(username);
-
         return (user != null);
     }
 
@@ -132,8 +132,11 @@ public class RegisterUser extends AppCompatActivity {
         }
 
         SharedPreferences.Editor editor = preferences.edit();
+        editor.clear(); // just a check to clear preferences before adding a new one
+        editor.apply();
         editor.putInt(USER_ID_KEY, userId);
         editor.putInt(USER_STATUS_KEY, user.getIsAdmin());
+        editor.apply();
     }
 
     private boolean addUserToDB() {
