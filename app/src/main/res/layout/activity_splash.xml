@@ -12,21 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="170dp"/>
+        android:layout_marginBottom="170dp" />
 
-    <TextView
-        android:id="@+id/shopName"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="170dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/shop_name"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="48sp"
-        android:textStyle="bold" />
+        android:layout_marginHorizontal="20dp"
+        app:srcCompat="@drawable/yourcraftshop" />
 
+    <ImageView
+        android:id="@+id/shopLogoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:minWidth="75dp"
+        android:minHeight="75dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/creeper" />
 
 </RelativeLayout>
