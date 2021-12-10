@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,12 +26,9 @@ import java.util.List;
 /**
  * Title: AdminManageUser.java
  * Description: This is where an admin can see who all the users are, but it does not show
- * passwords.  An admin can create a new user.
- * Notes: At this time admin accounts cannot be created or deleted.  The feature to delete
- * users are disabled since it can potentially break the way the minecraft world works, and
- * that would be bad.  The key elements for getting the delete functionality is coded in, but
- * needs testing and scenario testing to ensure it works as intended.  The truth is I prefer
- * disabling accounts, so if you want delete, make it happen.
+ * passwords.  An admin can create a new user.  The admin can deactivate accounts and then
+ * activate or delete them permanently.  Users who deleted their accounts show up here
+ * as deactivated.
  * Design File: activity_admin_manageruser.xml
  * Author: Juli S.
  * Date: 12/04/2021
@@ -39,6 +39,7 @@ import java.util.List;
  * This for clickable recyclerview?
  * https://www.youtube.com/watch?v=7GPUpvcU1FE
  */
+
 public class AdminManageUser extends AppCompatActivity implements IManageUserRecyclerView {
     ImageView backImg;          // the image from toolbar_layout to go back
     TextView toolbarTitleField; // the text for toolbar title
@@ -208,15 +209,40 @@ public class AdminManageUser extends AppCompatActivity implements IManageUserRec
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
-//    public void onDeleteClick(int position) {
-//        int id = userList.get(position).getUserID(); // using rv position in userList to find id
-//        User deleteUser = myDao.getUserByUserId(id);  // getting user object for the position
-//
-//        myDao.delete(deleteUser);
-//
-//        // Need to update the adapter with an updated list of users from the database.
-//        userAdapter.updateData(myDao.getAllUsers());
-//        // Do the update on display.
-//        recyclerView.getAdapter().notifyItemRemoved(position);
-//    }
+    public void onDeleteClick(int position) {
+        int id = userList.get(position).getUserID(); // using rv position in userList to find id
+        User deleteUser = myDao.getUserByUserId(id);  // getting user object for the position
+
+        // Confirm Delete
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage(R.string.deleteUser);
+
+        alertBuilder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(AdminManageUser.this, "The "
+                        + deleteUser.getUserName()
+                        + "'s account was thrown into lava.", Toast.LENGTH_SHORT).show();
+
+                // item deleted
+                myDao.delete(deleteUser);
+
+                // Need to update the adapter with an updated list of users from the database.
+                userAdapter.updateData(myDao.getAllUsers());
+                // Update list
+                userList = myDao.getAllUsers();
+                // Do the update on display.
+                recyclerView.getAdapter().notifyItemRemoved(position);
+            }
+        });
+
+        alertBuilder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+        alertBuilder.create().show();
+    }
 }

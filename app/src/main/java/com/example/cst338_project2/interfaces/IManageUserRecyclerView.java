@@ -8,5 +8,5 @@ package com.example.cst338_project2.interfaces;
 public interface IManageUserRecyclerView {
     void onStatusClick(int position);
 
-//    void onDeleteClick(int position);
+    void onDeleteClick(int position);
 }

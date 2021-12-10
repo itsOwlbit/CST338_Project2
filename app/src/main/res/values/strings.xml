@@ -48,4 +48,5 @@
     <string name="confirmDeleteItem">Are you sure you want to permanently delete this item?</string>
     <string name="temp">temp</string>
     <string name="orderReturn">Are you sure you want to do a return?</string>
+    <string name="deleteUser">Are you sure you want to permanently delete this user?</string>
 </resources>

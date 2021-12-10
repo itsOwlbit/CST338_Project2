@@ -83,18 +83,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 }
             });
 
-//            deleteField.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if(recyclerViewInterface != null) {
-//                        int pos = getAbsoluteAdapterPosition();
-//
-//                        if(pos != RecyclerView.NO_POSITION) {
-//                            recyclerViewInterface.onDeleteClick(pos);
-//                        }
-//                    }
-//                }
-//            });
+            deleteField.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(recyclerViewInterface != null) {
+                        int pos = getAbsoluteAdapterPosition();
+
+                        if(pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onDeleteClick(pos);
+                        }
+                    }
+                }
+            });
         }
 
         void bindData(final User item) {
@@ -107,8 +107,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             } else {
                 statusField.setText("(Inactive)");
                 statusField.setTextColor(Color.parseColor("#AAAAAA"));
-//                deleteField.setText("DELETE");
-//                deleteField.setTextColor(Color.parseColor("#FF5555"));
+                deleteField.setVisibility(View.VISIBLE);
             }
 
             int adminValue = item.getIsAdmin();
@@ -120,14 +119,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             } else {
                 isAdminField.setText("Shopper");
                 isAdminField.setTextColor(Color.parseColor("#CCA379"));
+                changeStatus.setVisibility(View.VISIBLE);
 
                 // An admin can't deactivate the account.  Lazy way of preventing 0 admin situation.
                 if(statusValue == 1) {
                     changeStatus.setText("Deactivate");
                     changeStatus.setTextColor(Color.parseColor("#AAAAAA"));
+                    deleteField.setVisibility(View.INVISIBLE);
                 } else {
                     changeStatus.setText("Activate");
                     changeStatus.setTextColor(Color.parseColor("#55FF55"));
+                    deleteField.setText("DELETE");
+                    deleteField.setTextColor(Color.parseColor("#FF5555"));
                 }
             }
         }
