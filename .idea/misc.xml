@@ -40,7 +40,7 @@
         <entry key="app/src/main/res/layout/logout_layout.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/layout/order_cardview.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/recyclerview_itemrow.xml" value="0.36944444444444446" />
-        <entry key="app/src/main/res/layout/toolbar_layout.xml" value="0.5009259259259259" />
+        <entry key="app/src/main/res/layout/toolbar_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/usermanager_cardview.xml" value="0.2381786339754816" />
         <entry key="app/src/main/res/layout/usermanager_view.xml" value="0.5" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3972222222222222" />
