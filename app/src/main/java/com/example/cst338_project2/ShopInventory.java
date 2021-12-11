@@ -62,7 +62,7 @@ public class ShopInventory extends AppCompatActivity implements IItemRecyclerVie
         myDao = AppDatabase.getDatabase(this);
 
         // Get list of items
-        itemList = myDao.getAllItems();
+        itemList = myDao.getAllItemsForSale();
 
         preparePreferences();
 
@@ -125,9 +125,9 @@ public class ShopInventory extends AppCompatActivity implements IItemRecyclerVie
         // To refresh recyclerview and reset list size from any changes.
         super.onResume();
         // Need to update the adapter with an updated list of items from the database.
-        itemAdapter.updateData(myDao.getAllItems());
+        itemAdapter.updateData(myDao.getAllItemsForSale());
         // Need to update itemList so the array size gets updated.
-        itemList = myDao.getAllItems();
+        itemList = myDao.getAllItemsForSale();
         // Do the update on display.
         recyclerView.getAdapter().notifyDataSetChanged();
     }

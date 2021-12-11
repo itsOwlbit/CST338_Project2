@@ -54,6 +54,9 @@ public interface MyDao {
     @Query("SELECT * FROM " + AppDatabase.ITEM_TABLE + " WHERE itemId = :id")
     Item getItemById(int id);
 
+    @Query("SELECT * FROM " + AppDatabase.ITEM_TABLE + " WHERE isForSale = \"1\"")
+    List<Item> getAllItemsForSale();
+
     @Insert
     void insert(Order... orders);
 
