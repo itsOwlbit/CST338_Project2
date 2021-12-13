@@ -437,6 +437,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                 // go to Admin Inventory
                 Intent intent = new Intent(ItemDetailActivity.this,
                         AdminInventory.class);
+                // Pop off the stack so the back arrow works correctly in next screen
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });

@@ -115,8 +115,9 @@ public class RegisterUser extends AppCompatActivity {
         signinLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
+                RegisterUser.super.onBackPressed();
+//                Intent intent = new Intent(v.getContext(), MainActivity.class);
+//                startActivity(intent);
             }
         });
     }
