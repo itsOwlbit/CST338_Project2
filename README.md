@@ -26,3 +26,7 @@ eCommerce project using Android Studio
 12/9 - Completed Shopper Order Returns and Admin Sales Report.  This means all 16 use cases now pass.  I still need to update some images and double check on everything.  When everything looks good, I will add the image stuff needed on the use case document and record videos for the final project video showing off my program in all its glory.  So glad to have gotten this far.<br><br>
 
 12/10 - I decided to add the delete user to admins.  Checking for bugs while recording videos for each use case.  I think I will redo the videos and then create one YouTube video of the whole project working.  I think it will be better if I come up with a video script so i can efficiently showcase everything.  I was finding my recordings being repetitious, and that costs time and storage space.  Now it is about checking for errors, fixing them, and doing a final recording to turn in the Project.
+
+12/11 - I needed to spend more time on other things. Not much progress today.<br><br>
+
+12/12 - I fixed an issue where the back button was going to a page that I thought should have been off the stack.  Now when those pages are done and the back is used, they are taken off the stack so pages go in proper order.  The project is finished.  The video and the use cases are all complete along with documentation.  The project has been fully submiteed.  Now all that is left is to update here, my journal, and eportfolio.  No rush on those.  <br><br>
